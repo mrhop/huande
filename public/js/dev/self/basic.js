@@ -22,6 +22,30 @@ $(document).ready(function () {
             prevText: "",
             nextText: ""
         });
+    } else if ($("body").attr("id") == "videos") {
+        // $('video').hover(function() {
+        //     $(this).prop("controls", true);
+        // }, function() {
+        //     $(this).prop("controls", false);
+        // });
+        $('video').click(function (e) {
+            var _this = this
+            $('video').each(function () {
+                if (_this !== this) {
+                    if (this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2) {
+                        this.pause()
+                        this.controls = true
+                    }
+                }
+            })
+            if ((this.currentTime <= 0 || this.paused || this.ended) && this.readyState > 0) {
+                this.play()
+                this.controls = false
+            } else if (this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2) {
+                this.pause()
+                this.controls = true
+            }
+        })
     }
 });
 
